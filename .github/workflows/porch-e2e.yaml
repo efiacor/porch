@@ -54,7 +54,6 @@ jobs:
           cluster_name: kind
       - name: Build Images and Deploy porch kpt pkg
         run: IMAGE_REPO=porch-kind IMAGE_TAG=${GITHUB_SHA:0:8} make run-in-kind-kpt
-        working-directory: ./porch
       - name: Wait For Server
         run: |
           for i in {1..10}; do
