@@ -48,9 +48,9 @@ jobs:
         uses: securego/gosec@master
         with:
           # we let the report trigger content trigger a failure using the GitHub Security features.
-          args: '-no-fail -exclude-dir generated -exclude-dir test -exclude-generated true -fmt sarif -out results.sarif ./...'
+          args: '-no-fail -exclude-dir=generated -exclude-dir=test -exclude-generated=true -fmt=sarif -out=results.sarif ./...'
       - name: Upload SARIF file
         uses: github/codeql-action/upload-sarif@v3
         with:
           # Path to SARIF file relative to the root of the repository
-          sarif_file: ${GITHUB_WORKSPACE}/results.sarif
+          sarif_file: ./results.sarif
