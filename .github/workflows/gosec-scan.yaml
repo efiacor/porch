@@ -49,6 +49,8 @@ jobs:
         with:
           # we let the report trigger content trigger a failure using the GitHub Security features.
           args: '-no-fail -exclude-dir=generated -exclude-dir=test -exclude-generated=true -fmt=sarif -out=results.sarif ./...'
+      - name: List dirs
+        run: ls -larth
       - name: Upload SARIF file
         uses: github/codeql-action/upload-sarif@v3
         with:
