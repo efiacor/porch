@@ -32,6 +32,9 @@ jobs:
   tests:
     name: Porch gosec Tests
     runs-on: ubuntu-latest
+    permissions:
+      # required for all workflows
+      security-events: write
     env:
       GO111MODULE: on
     steps:
@@ -47,7 +50,7 @@ jobs:
           # we let the report trigger content trigger a failure using the GitHub Security features.
           args: '-no-fail -exclude-dir generated -exclude-dir test -exclude-generated true -fmt sarif -out results.sarif ./...'
       - name: Upload SARIF file
-        uses: github/codeql-action/upload-sarif@v2
+        uses: github/codeql-action/upload-sarif@v3
         with:
           # Path to SARIF file relative to the root of the repository
           sarif_file: results.sarif
