@@ -62,6 +62,7 @@ jobs:
       - name: Verify Authentication
         run: |
           gh auth status
+          pwd
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
