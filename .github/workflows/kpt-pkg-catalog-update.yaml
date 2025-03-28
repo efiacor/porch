@@ -70,6 +70,8 @@ jobs:
 
       - name: Commit and push changes
         run: |
+          #Show files
+          ls -larth
           # Setup the committers identity.
           git config user.email "some-user@some-domain.com"
           git config user.name "Some User"
@@ -77,5 +79,5 @@ jobs:
           echo "Hello, world!" > new_file.txt
           git add new_file.txt
           git commit -m "chore: update porch pkg to latest"
-          git push origin HEAD:porch-pkg-update
+          git push origin porch-pkg-update
 
