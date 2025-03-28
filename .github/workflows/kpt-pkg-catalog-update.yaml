@@ -51,7 +51,7 @@ jobs:
         with:
           repository: efiacor/nephio-pkg-catalog
           path: catalog
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.GH_PR_PUSH }}
 
       - name: Commit and push changes
         run: |
