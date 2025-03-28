@@ -45,8 +45,6 @@ jobs:
         run: |
           cd porch
           PATH=./bin:$PATH IMAGE_REPO=docker.io/nephio IMAGE_TAG=${{ github.ref_name }} make deployment-config
-          cd $GITHUB_WORKSPACE
-          pwd
 
       - name: Checkout catalog repo
         uses: actions/checkout@v4
@@ -54,26 +52,14 @@ jobs:
           repository: efiacor/nephio-pkg-catalog
           path: catalog
           token: ${{ secrets.GITHUB_TOKEN }}
-        
-      # - name: Verify Authentication
-      #   run: |
-      #     gh auth status
-      #     pwd
-      #   env:
-      #     GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Create a new branch
-        run: |
-          cd catalog
-          git checkout -b porch-pkg-update
 
       - name: Commit and push changes
         run: |
           #Show files
-          cd catalog
+          cd $GITHUB_WORKSPACE/catalog
           pwd
           ls -larth
-          
+
           # Setup the committers identity.
           git config user.email "some-user@some-domain.com"
           git config user.name "Some User"
