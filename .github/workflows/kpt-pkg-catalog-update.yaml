@@ -42,18 +42,24 @@ jobs:
         run: mkdir -p bin && wget -O bin/kpt https://github.com/kptdev/kpt/releases/download/v1.0.0-beta.56/kpt_linux_amd64 && chmod +x bin/kpt
 
       - name: Build porch blueprint
-        run: PATH=./bin:$PATH IMAGE_REPO=docker.io/nephio IMAGE_TAG=${{ github.ref_name }} make deployment-config
+        run: |
+          cd porch
+          PATH=./bin:$PATH IMAGE_REPO=docker.io/nephio IMAGE_TAG=${{ github.ref_name }} make deployment-config
+      
+      - name: Move to workspace
+        run: |
+          cd /home/runner/work/
 
       - name: Checkout catalog repo
         uses: actions/checkout@v4
         with:
           repository: efiacor/nephio-pkg-catalog
-          path: catalog
+          path: /home/runner/work/catalog
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Move to catalog repo
         run: |
-          cd catalog
+          cd /home/runner/work/catalog
         
       - name: Verify Authentication
         run: |
