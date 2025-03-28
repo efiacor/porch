@@ -39,11 +39,14 @@ jobs:
           go-version: ">=1.23.5"
 
       - name: Download kpt CLI
-        run: mkdir -p bin && wget -O bin/kpt https://github.com/kptdev/kpt/releases/download/v1.0.0-beta.56/kpt_linux_amd64 && chmod +x bin/kpt
+        run: mkdir -p porch/bin && wget -O porch/bin/kpt https://github.com/kptdev/kpt/releases/download/v1.0.0-beta.56/kpt_linux_amd64 && chmod +x porch/bin/kpt
 
       - name: Build porch blueprint
         run: |
+          cd porch
           PATH=./bin:$PATH IMAGE_REPO=docker.io/nephio IMAGE_TAG=${{ github.ref_name }} make deployment-config
+          cd $GITHUB_WORKSPACE
+          pwd
 
       - name: Checkout catalog repo
         uses: actions/checkout@v4
