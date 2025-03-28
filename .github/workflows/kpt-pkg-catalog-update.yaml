@@ -46,7 +46,7 @@ jobs:
       - name: Checkout catalog repo
         uses: actions/checkout@v4
         with:
-          repository: nephio-project/catalog
+          repository: efiacor/nephio-pkg-catalog
           path: catalog
 
       # - name: Authenticate GitHub CLI
@@ -70,6 +70,10 @@ jobs:
 
       - name: Commit and push changes
         run: |
+          # Setup the committers identity.
+          git config user.email "some-user@some-domain.com"
+          git config user.name "Some User"
+
           echo "Hello, world!" > new_file.txt
           git add new_file.txt
           git commit -m "chore: update porch pkg to latest"
